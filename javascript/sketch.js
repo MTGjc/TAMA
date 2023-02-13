@@ -170,12 +170,13 @@ function handleButtonPress()
         });
     }
     
-    if(food.length > 0){
+    if(food.length > 3){
       button.html("FEEDING");
       button.addClass("inactive");
     }
   
 }
+
 
 function windowResized() {
 
