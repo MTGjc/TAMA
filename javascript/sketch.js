@@ -23,6 +23,8 @@ class Creature {
 
     if (direction.mag() < this.diameter/2){
       this.full = 1000;
+      let addSize = slider.value();
+      this.diameter += addSize;
       return true;
     } 
   
@@ -74,8 +76,9 @@ class Creature {
   
     // Display circle at location vector
     noStroke();
-    fill(map(this.full,0,100,0,255),0,255);
+    fill(map(this.full,0,1000,0,255),0,random(255));
     circle(this.location.x,this.location.y,this.diameter);
+
   }
 }
 
@@ -83,12 +86,18 @@ class Creature {
 // an array to store the creatures
 let creatures = [];
 let food = [];
+let slider;
+
 
 function setup() {
   // createCanvas(400, 400);
 
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("sketch-container"); //move our canvas inside this HTML element
+
+  slider = createSlider(0, 30, 10);
+  slider.position(10, 10);
+  slider.style('width', '80px');
 
   addGUI();
 
@@ -100,7 +109,10 @@ function setup() {
 
 function draw() {
   background(200);
-  
+  fill(255,0,0);
+  textSize(20);
+  text('Adjust the Expected Purple Circle Size after eating the food', 10, 50);
+
   // loop through all the creatrure and animate them each frame by accessing their update function
   for (let c of creatures) {
     c.update();
